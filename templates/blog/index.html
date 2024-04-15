@@ -1,0 +1,161 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% load hitcount_tags %}
+
+{% block title %} Home {% endblock %}
+
+{% block banner %}
+    <!-- banner section start -->
+   <div class="container-fluid clearfix">
+      <div class="banner_section layout_padding">
+         <h1 class="banner_taital">Xush kelibsiz!</h1>
+         <div id="my_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="image_main">
+                     <div class="container">
+                        <h1 class="text-white text-center">IT kompaniyasi vakilimisiz?</h1>
+                        <img src="{% static 'images/kompany.jpg' %}" class="image-1">
+                        <div class="contact_bt mt-0"><a href="{% url 'contact_page' %}">Biz bilan aloqa</a></div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="image_main">
+                     <div class="container">
+                        <h1 class="text-white text-center">IT o'quv markazingiz bormi?</h1>
+                        <img src="{% static 'images/education.jpg' %}" class="image-1">
+                        <div class="contact_bt"><a href="contact.html">Contact Us</a></div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="image_main">
+                     <div class="container">
+                        <h1 class="text-white text-center">AT bloggermisiz?</h1>
+                        <img src="{% static 'images/bloger.png' %}" class="image-1">
+                        <div class="contact_bt"><a href="contact.html">Contact Us</a></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+            <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+            <i class="fa fa-angle-right"></i>
+            </a>
+         </div>
+      </div>
+   </div>
+   <!-- banner section end -->
+{% endblock %}
+
+
+
+
+{% block content %}
+         <div class="row">
+            <div class="col-lg-3 col-sm-6">
+               <h3 class="text-info bg-light">Eng so'ngi postlar</h3>
+               {% for post in recent_posts %}
+                  <div class="card mt-3">
+                     <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h5>
+                       <p class="card-text">
+                          Tags:
+                          {% for tag in post.tags.all %}
+                              <a href="{% url 'tagged' tag.slug %}">#{{tag}}</a>
+                           {% endfor %}
+                          <i class="fa fa-eye" aria-hidden="true"></i> <strong>{% get_hit_count for post %}</strong> <br> <br>
+                          {{ post.text | truncatewords:15 }}
+                       </p>
+                     </div>
+                   </div>
+               {% endfor %}
+            </div>
+            <div class="col-lg-3 col-sm-6">
+               <h3 class="text-info bg-light">Eng ko'p ko'rilganlar</h3>
+               {% for post in most_viewed %}
+                  <div class="card mt-3">
+                     <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h5>
+                       <p class="card-text">
+                          Tags:
+                          {% for tag in post.tags.all %}
+                              <a href="{% url 'tagged' tag.slug %}">#{{tag}}</a>
+                           {% endfor %}
+                          <i class="fa fa-eye" aria-hidden="true"></i> <strong>{% get_hit_count for post %}</strong> <br> <br>
+                          {{ post.text | truncatewords:15 }}
+                       </p>
+                     </div>
+                   </div>
+               {% endfor %}
+            </div>
+            <div class="col-lg-3 col-sm-6">
+               <h3 class="text-info bg-light">Tavsiya qilinganlar</h3>
+               {% for post in recommended %}
+                  <div class="card mt-3">
+                     <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h5>
+                       <p class="card-text">
+                          Tags:
+                          {% for tag in post.tags.all %}
+                              <a href="{% url 'tagged' tag.slug %}">#{{tag}}</a>
+                           {% endfor %}
+                          <i class="fa fa-eye" aria-hidden="true"></i> <strong>{% get_hit_count for post %}</strong> <br> <br>
+                          {{ post.text | truncatewords:15 }}
+                       </p>
+                     </div>
+                   </div>
+               {% endfor %}
+            </div>
+            <div class="col-lg-3 col-sm-6">
+               <h3 class="text-info bg-light">Bo'limlar</h3>
+               <div class="card mt-3">
+                  {% for category in categories %}
+                     <div class="card-body">
+                        <h5 class="card-text"><a href="#">{{ category.name }}</a></h5>
+                        <hr>
+                     </div>
+                  {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+               <h3 class="text-info bg-light">Haftaning eng ommabop postlari</h3>
+               {% for post in popular_posts_week %}
+                  <div class="card mt-3">
+                     <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h5>
+                       <p class="card-text">
+                          Tags:
+                          {% for tag in post.tags.all %}
+                              <a href="{% url 'tagged' tag.slug %}">#{{tag}}</a>
+                           {% endfor %}
+                          <i class="fa fa-eye" aria-hidden="true"></i> <strong>{% get_hit_count for post %}</strong> <br> <br>
+                          {{ post.text | truncatewords:15 }}
+                       </p>
+                     </div>
+                   </div>
+               {% endfor %}
+            </div>
+            <div class="col-lg-3 col-sm-6">
+               <h3 class="text-info bg-light">Oyning eng ommabop postlari</h3>
+               {% for post in popular_posts_month %}
+                  <div class="card mt-3">
+                     <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h5>
+                       <p class="card-text">
+                          Tags:
+                          {% for tag in post.tags.all %}
+                              <a href="{% url 'tagged' tag.slug %}">#{{tag}}</a>
+                           {% endfor %}
+                          <i class="fa fa-eye" aria-hidden="true"></i> <strong>{% get_hit_count for post %}</strong> <br> <br>
+                          {{ post.text | truncatewords:15 }}
+                       </p>
+                     </div>
+                   </div>
+               {% endfor %}
+            </div>
+         </div>
+{% endblock %}

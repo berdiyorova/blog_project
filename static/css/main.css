@@ -1,0 +1,21 @@
+.profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.small-profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.detail-pic {
+     width: 500px;
+     height: 400px;
+     margin: 0px 20px 20px;
+}
+
+.detail-text {
+    text-align: justify;
+}

@@ -1,0 +1,75 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% load hitcount_tags %}
+
+{% block title %} Detail page {% endblock %}
+
+{% block content %}
+
+       <div class="row justify-content-between">
+           <div class="col-lg-8 col-sm-12">
+                 <h1>
+                     {{ post.title }}
+                     {% if post.author == request.user %}
+                        <span>
+                            <a href="{% url 'update_post' post.pk %}"><i class="bi bi-pencil btn btn-outline-info fs-5"></i></a>
+                            <a href="{% url 'post_delete' post.pk %}"><i class="bi bi-trash btn btn-outline-danger fs-5"></i></a>
+                        </span>
+                     {% endif %}
+                 </h1>
+
+                <p>
+                    Author: <strong>{{ post.author }}</strong> <br>
+                    Published: <strong>{{ post.published_at | date }}</strong><br>
+                    <i class="fa fa-eye" aria-hidden="true"></i> <strong>{% get_hit_count for post %}</strong> <br>
+                    Tags:
+                    {% for tag in post.tags.all %}
+                        <a href="#" class="btn btn-outline-primary">#{{ tag }}</a>
+                    {% endfor %}
+                </p>
+
+                <img src="{{ post.image.url }}" class="detail-pic mt-4">
+                <p class="detail-text"><strong>{{ post.text }}</strong></p>
+
+               {% if post.comments.exists %}
+                    <h4 class="ms-5">Comments</h4> <hr>
+
+                    {% for comment in post.comments.all %}
+                        <div class="row mb-4">
+                            <div class="col-1">
+                                <img class="small-profile-pic" src="{{ comment.user.photo.url }}">
+                            </div>
+                            <div class="col-7 ms-1">
+                                <p class="fst-italic">{{ comment.created_time }} <br>
+                                    {{ comment.user }}</p>
+                                <span class="text-muted mt-2">{{ comment.body }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+               {% endif %}
+           </div>
+            <div class="col-lg-3 col-sm-6">
+               <div class="card my-5">
+                   <h3 class="text-info bg-light">Bo'limlar</h3>
+                  {% for category in categories %}
+                     <div class="card-body">
+                        <h6 class="card-text"><a href="#">{{ category.name }}</a></h6>
+                     </div>
+                  {% endfor %}
+                </div>
+
+                <div class="card mt-5">
+                    <h3 class="text-info bg-light">Izoh qo'shish</h3>
+                    <div class="card-body">
+                         <form action="{% url 'comments' post.id %}" method="post"> {% csrf_token %}
+                            <textarea class="massage_text" placeholder="Message" rows="5" name="body"></textarea>
+                            <button class="btn btn-warning btn-lg mt-5 email_text" type="submit">Saqlash</button>
+                         </form>
+                    </div>
+                  </div>
+            </div>
+       </div>
+
+{% endblock %}

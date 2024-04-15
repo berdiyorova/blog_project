@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+
+<div class="container m-5">
+    <h3>Saytga kirish</h3>
+
+    <div class="row">
+        <div class="col-4 mb-4">
+            <form method="post">
+                {% csrf_token %}
+                {{ login_form | crispy }}
+                <button class="btn btn-primary" type="submit">Kirish</button>
+            </form>
+        </div>
+        <span class="ms-3">Hali akkountingiz yo'q bo'lsa, u holda   <a href="{% url 'register' %}">ro'yxatdan o'ting</a> </span>
+    </div>
+</div>
+
+{% endblock %}

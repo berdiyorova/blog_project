@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %} About {% endblock %}
+
+{% block content %}
+      <!-- about section start -->
+         <div class="mb-5">
+            <h1>Loyiha haqida</h1>
+            <p class="text-mute fw-bold fs-4 lh-base">Ushbu blog orqali istalgan odam ro’yhatdan o’tib, o’zining axborot texnologiyalari haqida maqolalarini
+               joylashtirishi mumkin. Bepul ro’yhatdan o’tib, o’z g’oyalaringiz bilan bo’lishing!</p>
+            <div class="row">
+               <div class="col-lg-8 col-sm-12">
+                  <div class="about_img mt-3"><img src="{% static 'images/kompany.jpg' %}"></div>
+                  <div class="like_icon"><img src="{% static 'images/like-icon.png' %}"></div>
+                  <p class="lorem_text fs-5 lh-sm">Agar <strong>AT kompaiyasi valiki</strong> bo’lsangiz, ushbu saytda o’z blogingizni yurg’izib, yangi mijozlarni jalb qilishingiz mumkin.
+                     O’z blogingizda qanaqa texnologiyalar ishlatishingiz haqida maqolalar yozib potensial mijozni qiziqtiring.</p>
+               </div>
+
+               <div class="col-lg-4 col-sm-12">
+                  <div class="image_5 my-3"><img src="{% static 'images/education.jpg' %}"></div>
+                  <p class="about_text fs-5 lh-sm">Agar <strong>o’quv markazingiz bo’lsa</strong> – ushbu sayt orqali blog ochib, o’quvchilarni jalb qilishingiz mumkin. Unutman – bu sayt mexmonlari AT sohalariga qiziquvchan bo’lib, sizning potensial o’quvchilaringiz bo’lishi mumkin</p>
+
+                  <div class="image_5 my-3"><img src="{% static 'images/bloger.png' %}"></div>
+                  <p class="about_text fs-5 lh-sm"><strong>AT blogerimisiz?</strong> Unda youtube, instagram, telegram va boshqa ijtimoiy tarmoqlardagi kanallaringizni mashxur qilishning eng zor usuli – bu MyBlog.uz!
+                     Qidiruv tizimlari ushbu saytdagi bloglaringizni oson topishga yordam beradi. O`z maqolalaringizda esa ijtimoy tarmoqlarlaringizda ssilkalar qo`yishingiz kifoya!</p>
+               </div>
+            </div>
+         </div>
+      <!-- about section end -->
+{% endblock %}

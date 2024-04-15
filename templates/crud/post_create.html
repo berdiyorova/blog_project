@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Create Post {% endblock %}
+
+{% block content %}
+        <div class="row m-5">
+            <div class="col-7 p-5">
+                <h2 class="text-uppercase">Yangi post joylash</h2>
+                <form enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
+                    <select class="email_text" name="category">
+                        {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" class="email_text" placeholder="Title" name="title">
+                    <textarea class="massage_text" placeholder="Text" rows="5" name="text"></textarea>
+                    <input type="text" class="email_text" placeholder="Tags" data-role="tagsinput" name="tags">
+                    <input type="file" class="email_text" placeholder="Image" name="image">
+                    <button class="btn btn-warning btn-lg mt-5 email_text" type="submit">Saqlash</button>
+                </form>
+            </div>
+        </div>
+{% endblock %}
